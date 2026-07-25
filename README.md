@@ -78,6 +78,10 @@ MedicalSystem/
 
 This project was developed for academic purposes as part of a Master's program in Digital Engineering for Healthcare. It is not intended for real clinical or medical use — data storage, authentication, and validation are simplified for a local prototype context.
 
+##🎥 Demo Video
+
+👉 Watch the demo: https://www.youtube.com/watch?v=yeeTuL4HN_I
+
 ## 👩‍🎓 Authors
 
 - **Siham Ait Taleb** — **Khadija El Kinani** 
