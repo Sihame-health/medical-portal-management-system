@@ -62,7 +62,7 @@ MedicalSystem/
 | Admin | admin | admin123 |
 | Doctor | medecin | 123456 |
 | Nurse | infirmier | 123456 |
-| Pharmacy | pharmacie | 123456 |
+| Pharmacy | pharmacien | 123456 |
 | Reception | accueil | 123456 |
 
 > These are default demo accounts auto-generated on first run (see `DatabaseHelper.InitializeData()`), used for local testing only — not real credentials.
