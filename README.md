@@ -6,8 +6,6 @@ A desktop application that connects reception, doctors, nurses, and pharmacy int
 
 Hospitals run on handoffs: reception registers a patient, a doctor prescribes, a nurse administers, a pharmacist fulfills. Without a shared system, that handoff happens on paper or gets lost between departments. This project is a local, role-based portal (WPF/C#) that keeps every step — registration, consultation, prescription, treatment, medication stock — in one connected system, with real-time notifications between roles (e.g. a nurse flags a concern, the doctor gets an urgent alert).
 
-**Concept & specifications:** Siham Ait Taleb
-**Development:** Khadija El Kinani
 
 ## 🎯 Features by Role
 
@@ -62,10 +60,10 @@ MedicalSystem/
 | Role | Username | Password |
 |---|---|---|
 | Admin | admin | admin123 |
-| Doctor | medecin1 | 1234 |
-| Nurse | infirmier1 | 1234 |
-| Pharmacy | pharmacie1 | 1234 |
-| Reception | accueil1 | 1234 |
+| Doctor | medecin | 123456 |
+| Nurse | infirmier | 123456 |
+| Pharmacy | pharmacie | 123456 |
+| Reception | accueil | 123456 |
 
 > These are default demo accounts auto-generated on first run (see `DatabaseHelper.InitializeData()`), used for local testing only — not real credentials.
 

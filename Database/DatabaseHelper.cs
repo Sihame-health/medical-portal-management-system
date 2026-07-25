@@ -32,15 +32,15 @@ namespace MedicalSystem.Database
                 {
                     new User { Id = 1, FirstName = "Admin", LastName = "System", Username = "admin",
                                Password = "admin123", Email = "admin@hospital.com", Role = "Admin", Status = "Actif" },
-                    new User { Id = 2, FirstName = "Jean", LastName = "Dupont", Username = "medecin1",
-                               Password = "1234", Email = "jean.dupont@hospital.com", Role = "Doctor",
+                    new User { Id = 2, FirstName = "Doctor", LastName = "Demo", Username = "medecin",
+                               Password = "123456", Email = "medecin@hospital.com", Role = "Doctor",
                                Status = "Actif", ServiceId = 1, ServiceName = "Cardiologie" },
-                    new User { Id = 3, FirstName = "Marie", LastName = "Martin", Username = "infirmier1",
-                               Password = "1234", Email = "marie.martin@hospital.com", Role = "Nurse", Status = "Actif" },
-                    new User { Id = 4, FirstName = "Pierre", LastName = "Bernard", Username = "pharmacie1",
-                               Password = "1234", Email = "pierre.bernard@hospital.com", Role = "Pharmacy", Status = "Actif" },
-                    new User { Id = 5, FirstName = "Sophie", LastName = "Petit", Username = "accueil1",
-                               Password = "1234", Email = "sophie.petit@hospital.com", Role = "Reception", Status = "Actif" }
+                    new User { Id = 3, FirstName = "Nurse", LastName = "Demo", Username = "infirmier",
+                               Password = "123456", Email = "infirmier@hospital.com", Role = "Nurse", Status = "Actif" },
+                    new User { Id = 4, FirstName = "Pharmacist", LastName = "Demo", Username = "pharmacien",
+                               Password = "123456", Email = "pharmacien@hospital.com", Role = "Pharmacy", Status = "Actif" },
+                    new User { Id = 5, FirstName = "Reception", LastName = "Demo", Username = "accueil",
+                               Password = "123456", Email = "accueil@hospital.com", Role = "Reception", Status = "Actif" }
                 };
                 SaveUsers(defaultUsers);
             }
@@ -269,7 +269,7 @@ namespace MedicalSystem.Database
                 return (false, 0, 0);
 
             return (medication.Quantity > 0, medication.Quantity, medication.MinThreshold);
-        
+
         }
         // Ajouter dans DatabaseHelper.cs
         public static void FixExistingPrescriptions()
