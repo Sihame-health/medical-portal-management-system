@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UseWPF>true</UseWPF>
+		<ApplicationIcon>hospital_6144997.ico</ApplicationIcon>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Content Include="hospital_6144997.ico" />
+	</ItemGroup>
+	<!-- i dont know 
+	<ItemGroup>
+		<PackageReference Include="System.Text.Json" Version="8.0.0" />
+	</ItemGroup>
+-->
+</Project>

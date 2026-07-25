@@ -1,0 +1,9 @@
++-----------+-----------+-----------+
+| Role      | login     | password  |
++-----------+-----------+-----------+
+| admin     | admin     | admin123  |
+| medecin   | khaoula   | 123456    |
+| infirmi   | safae     | 123456    |
+| pharmac   | siham     | 123456    |
+| accueil   | khadija   | 123456    |
++-----------+-----------+-----------+

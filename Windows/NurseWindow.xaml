@@ -1,0 +1,224 @@
+﻿<Window x:Class="MedicalSystem.NurseWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Portail Infirmier"
+        Height="700"
+        Width="1200"
+        MinHeight="500"
+        MinWidth="800"
+        WindowStartupLocation="CenterScreen"
+        Background="#F5F5F5"
+        Loaded="Window_Loaded">
+
+    <Window.Resources>
+        <!-- TextBlocks: wrap by default for long texts -->
+        <Style TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+
+        <!-- Card responsive -->
+        <Style x:Key="CardStyle" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="18"/>
+            <Setter Property="Margin" Value="0,0,0,16"/>
+            <Setter Property="MinWidth" Value="320"/>
+            <Setter Property="MaxWidth" Value="1100"/>
+            <Setter Property="BorderBrush" Value="#E6E6E6"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="14"
+                                      ShadowDepth="2"
+                                      Opacity="0.18"
+                                      Color="Gray"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Navigation buttons (sidebar) -->
+        <Style x:Key="NavButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="46"/>
+            <Setter Property="MinWidth" Value="160"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="16,0"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#0A4A50"/>
+                </Trigger>
+                <Trigger Property="IsKeyboardFocused" Value="True">
+                    <Setter Property="Background" Value="#0A4A50"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Action buttons (content area) -->
+        <Style x:Key="ActionButtonBase" TargetType="Button">
+            <Setter Property="MinWidth" Value="160"/>
+            <Setter Property="Height" Value="42"/>
+            <Setter Property="Margin" Value="4"/>
+            <Setter Property="Padding" Value="14,0"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="6"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.92"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Opacity" Value="0.85"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.55"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="PrimaryButton" BasedOn="{StaticResource ActionButtonBase}" TargetType="Button">
+            <Setter Property="Background" Value="#0D5C63"/>
+        </Style>
+
+        <Style x:Key="SuccessButton" BasedOn="{StaticResource ActionButtonBase}" TargetType="Button">
+            <Setter Property="Background" Value="#2ECC71"/>
+        </Style>
+
+        <Style x:Key="InfoButton" BasedOn="{StaticResource ActionButtonBase}" TargetType="Button">
+            <Setter Property="Background" Value="#209CED"/>
+        </Style>
+
+        <Style x:Key="WarningButton" BasedOn="{StaticResource ActionButtonBase}" TargetType="Button">
+            <Setter Property="Background" Value="#FFC107"/>
+            <Setter Property="Foreground" Value="#212529"/>
+        </Style>
+
+        <Style x:Key="DangerButton" BasedOn="{StaticResource ActionButtonBase}" TargetType="Button">
+            <Setter Property="Background" Value="#E74C3C"/>
+        </Style>
+
+        <!-- Logout button -->
+        <Style x:Key="LogoutButtonStyle" BasedOn="{StaticResource NavButtonStyle}" TargetType="Button">
+            <Setter Property="Background" Value="#C44536"/>
+            <Setter Property="Height" Value="46"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#A83629"/>
+                </Trigger>
+                <Trigger Property="IsKeyboardFocused" Value="True">
+                    <Setter Property="Background" Value="#A83629"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <!-- Menu lateral: largeur flexible avec MinWidth -->
+            <ColumnDefinition Width="Auto" MinWidth="200"/>
+            <!-- Contenu -->
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Menu lateral -->
+        <Border Grid.Column="0"
+                Background="#0D5C63"
+                Width="250"
+                MinWidth="200">
+            <DockPanel LastChildFill="True">
+
+                <!-- En-tete -->
+                <Border DockPanel.Dock="Top"
+                        Background="#0A4A50"
+                        Padding="16"
+                        Margin="0,0,0,12">
+                    <StackPanel>
+                        <TextBlock x:Name="NurseNameText" Text="NURSE PORTAL"
+                                   FontSize="16"
+                                   FontWeight="Bold"
+                                   Foreground="White"/>
+                        <TextBlock x:Name="NurseInfoText" Text="Inf. Sarah"
+                                   FontSize="11"
+                                   Foreground="#B0E0E6"
+                                   Margin="0,4,0,0"/>
+                        <TextBlock Text="Raccourcis: Ctrl+1/2/3/4, echap"
+                                   FontSize="10"
+                                   Foreground="#B0E0E6"
+                                   Margin="0,8,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Navigation -->
+                <StackPanel DockPanel.Dock="Top" Margin="8,0,8,0">
+                    <Button x:Name="BtnMyPatients"
+                            Content="👥 Mes Patients"
+                            Style="{StaticResource NavButtonStyle}"
+                            Click="BtnMyPatients_Click"/>
+                    <Button x:Name="BtnMedicationRequests"
+                            Content="💊 Demandes Médicaments"
+                            Style="{StaticResource NavButtonStyle}"
+                            Click="BtnMedicationRequests_Click"/>
+                    <Button x:Name="BtnNotifications"
+                            Content="🔔 Notifications"
+                            Style="{StaticResource NavButtonStyle}"
+                            Click="BtnNotifications_Click"/>
+                    <!-- Dans le StackPanel de navigation, ajouter ce bouton : -->
+                    <Button x:Name="BtnHistory"
+                            Content="📋 Historique"
+                            Style="{StaticResource NavButtonStyle}"
+                            Click="BtnHistory_Click"/>  
+                </StackPanel>
+
+                <!-- Déconnexion en bas -->
+                <Border DockPanel.Dock="Bottom" Padding="8">
+                    <Button x:Name="BtnLogout"
+                            Content="🚪 Déconnexion"
+                            Style="{StaticResource LogoutButtonStyle}"
+                            Click="BtnLogout_Click"/>
+                </Border>
+            </DockPanel>
+        </Border>
+
+        <!-- Zone de contenu responsive -->
+        <Grid Grid.Column="1">
+            <ScrollViewer x:Name="MainScrollViewer"
+                          VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Auto"
+                          Padding="16">
+                <StackPanel x:Name="ContentPanel"
+                            MinWidth="500">
+                    <!-- Le contenu changera selon le bouton clique -->
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Window>

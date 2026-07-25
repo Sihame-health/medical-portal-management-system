@@ -1,0 +1,15 @@
+# Visual Studio / .NET build artifacts — never commit these
+bin/
+obj/
+.vs/
+
+# User-specific files
+*.user
+*.suo
+
+# Local runtime data generated on first run
+**/Data/*.json
+
+# OS files
+.DS_Store
+Thumbs.db

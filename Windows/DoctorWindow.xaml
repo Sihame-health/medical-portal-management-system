@@ -1,0 +1,243 @@
+﻿<Window x:Class="MedicalSystem.DoctorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Portail Medecin"
+        Height="700"
+        Width="1200"
+        MinHeight="500"
+        MinWidth="800"
+        WindowStartupLocation="CenterScreen"
+        Background="#F5F5F5"
+        Loaded="DoctorWindow_Loaded"
+        PreviewKeyDown="DoctorWindow_PreviewKeyDown">
+
+    <Window.Resources>
+        <!-- Cards (min/max) -->
+        <Style x:Key="CardStyle" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="18"/>
+            <Setter Property="Margin" Value="0,0,0,16"/>
+            <Setter Property="MaxWidth" Value="1000"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="14" ShadowDepth="2" Opacity="0.18" Color="Gray"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Text styles -->
+        <Style x:Key="PageTitle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#0D5C63"/>
+            <Setter Property="Margin" Value="0,0,0,18"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+
+        <Style x:Key="SectionTitle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0,0,0,12"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+
+        <!-- Inputs -->
+        <Style x:Key="InputTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Padding" Value="10,0"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="MinWidth" Value="220"/>
+        </Style>
+
+        <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Margin" Value="6"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="MinWidth" Value="170"/>
+            <Setter Property="IsTextSearchEnabled" Value="True"/>
+        </Style>
+
+        <!-- Buttons -->
+        <Style x:Key="BaseButton" TargetType="Button">
+            <Setter Property="MinWidth" Value="160"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Padding" Value="12,0"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="8" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.92"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Opacity" Value="0.82"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="PrimaryButtonStyle" BasedOn="{StaticResource BaseButton}" TargetType="Button">
+            <Setter Property="Background" Value="#0D5C63"/>
+        </Style>
+
+        <Style x:Key="InfoButtonStyle" BasedOn="{StaticResource BaseButton}" TargetType="Button">
+            <Setter Property="Background" Value="#209CEE"/>
+        </Style>
+
+        <Style x:Key="SuccessButtonStyle" BasedOn="{StaticResource BaseButton}" TargetType="Button">
+            <Setter Property="Background" Value="#2ECC71"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+
+        <Style x:Key="DangerButtonStyle" BasedOn="{StaticResource BaseButton}" TargetType="Button">
+            <Setter Property="Background" Value="#DC3545"/>
+        </Style>
+
+        <!-- Sidebar navigation -->
+        <Style x:Key="NavButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="18,0"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#0A4A50"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="LogoutButtonStyle" TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+            <Setter Property="Background" Value="#C44536"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#A83629"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <!-- Responsive sidebar -->
+            <ColumnDefinition Width="Auto" MinWidth="200" MaxWidth="320"/>
+            <ColumnDefinition Width="6"/>
+            <!-- Content min width -->
+            <ColumnDefinition Width="*" MinWidth="500"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Sidebar -->
+        <Border Grid.Column="0" Background="#0D5C63">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Header -->
+                <Border Grid.Row="0" Background="#0A4A50" Padding="18" Margin="0,0,0,14">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="DOCTOR PORTAL" FontSize="18" FontWeight="Bold" Foreground="White"/>
+                            <Border x:Name="NotificationBadge" 
+                                    Background="Red" 
+                                    CornerRadius="10"
+                                    Padding="6,3"
+                                    Margin="10,0,0,0"
+                                    Visibility="Collapsed">
+                                <TextBlock x:Name="NotificationCount" 
+                                           Text="0" 
+                                           Foreground="White" 
+                                           FontSize="11"
+                                           FontWeight="Bold"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
+                            </Border>
+                        </StackPanel>
+                        <TextBlock x:Name="DoctorNameText" Text="Dr. Martin" FontSize="12" Foreground="#B0E0E6" Margin="0,5,0,0"/>
+                        <TextBlock Text="Raccourcis: Ctrl+1/2/3/4, echap"
+                           FontSize="10"
+                           Foreground="#B0E0E6"
+                           Margin="0,8,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Nav -->
+                <StackPanel Grid.Row="1">
+                    <Button x:Name="BtnPatientList"
+                            Content="👥 Mes Patients "
+                            Click="BtnPatientList_Click"
+                            Style="{StaticResource NavButtonStyle}"/>
+
+                    <Button x:Name="BtnCreatePrescription"
+                            Content="📝 Créer Prescription "
+                            Click="BtnCreatePrescription_Click"
+                            Style="{StaticResource NavButtonStyle}"/>
+
+                    <Button x:Name="BtnHistory"
+                            Content="📋 Historique"
+                            Click="BtnHistory_Click"
+                            Style="{StaticResource NavButtonStyle}"/>
+
+                    <Button x:Name="BtnNotifications"
+                            Content="🔔 Notifications "
+                            Click="BtnNotifications_Click"
+                            Style="{StaticResource NavButtonStyle}"/>
+                </StackPanel>
+
+                <!-- Logout -->
+                <Button Grid.Row="2"
+                        Content="🚪 Déconnexion "
+                        Click="BtnLogout_Click"
+                        Style="{StaticResource LogoutButtonStyle}"
+                        Margin="0,10,0,10"/>
+            </Grid>
+        </Border>
+
+        <!-- Splitter (optional but nice UX) -->
+        <GridSplitter Grid.Column="1"
+                      Width="6"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      Background="#E6E6E6"
+                      ShowsPreview="True"/>
+
+        <!-- Content -->
+        <Grid Grid.Column="2" Margin="18">
+            <ScrollViewer x:Name="MainScrollViewer"
+                          VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled"
+                          Padding="6">
+                <StackPanel x:Name="ContentPanel" MinWidth="500"/>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Window>

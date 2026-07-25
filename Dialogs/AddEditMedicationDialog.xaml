@@ -1,0 +1,260 @@
+﻿<Window x:Class="MedicalSystem.AddEditUserDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Ajouter Utilisateur"
+        Height="650"
+        Width="550"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="0,5,0,5"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="8,5"/>
+            <Setter Property="MinWidth" Value="80"/>
+        </Style>
+    </Window.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Disabled"
+                  Padding="5">
+        <Grid Margin="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <StackPanel Grid.Row="0" Margin="0,0,0,20">
+                <TextBlock Text="👤 Ajouter un Utilisateur"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           Foreground="#0D5C63"/>
+                <TextBlock Text="Remplissez les informations de l'utilisateur"
+                           FontSize="12"
+                           Foreground="#666"/>
+            </StackPanel>
+
+            <!-- Informations personnelles -->
+            <StackPanel Grid.Row="1">
+                <TextBlock Text="Informations personnelles"
+                           FontWeight="SemiBold"
+                           Foreground="#0D5C63"
+                           Margin="0,0,0,5"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                        <TextBlock Text="Prénom *"/>
+                        <TextBox x:Name="FirstNameTextBox" 
+                                 ToolTip="Prénom de l'utilisateur"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="Nom *"/>
+                        <TextBox x:Name="LastNameTextBox"
+                                 ToolTip="Nom de famille de l'utilisateur"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+
+            <!-- Email avec validation -->
+            <StackPanel Grid.Row="2" Margin="0,10,0,0">
+                <TextBlock Text="Email professionnel *"
+                           FontWeight="SemiBold"/>
+                <TextBox x:Name="EmailTextBox"
+                         ToolTip="Email professionnel de l'utilisateur. Exemple: nom.prenom@hospital.com"/>
+
+                <TextBlock x:Name="EmailValidationTextBlock"
+                           FontSize="11"
+                           Foreground="Gray"
+                           TextWrapping="Wrap"
+                           Margin="0,2,0,5"/>
+
+                <TextBlock Text="Format attendu: nom.prenom@hospital.com ou nom@chu-paris.fr"
+                           FontSize="10"
+                           Foreground="#666"
+                           FontStyle="Italic"/>
+            </StackPanel>
+
+            <!-- Identifiants -->
+            <StackPanel Grid.Row="3" Margin="0,10,0,0">
+                <TextBlock Text="Identifiants de connexion"
+                           FontWeight="SemiBold"
+                           Foreground="#0D5C63"
+                           Margin="0,0,0,5"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                        <TextBlock Text="Nom d'utilisateur *"/>
+                        <TextBox x:Name="UsernameTextBox"
+                                 ToolTip="Nom d'utilisateur pour se connecter au système"/>
+                    </StackPanel>
+
+                    <Button Grid.Column="1"
+                            Content="Générer"
+                            Click="GenerateUsernameButton_Click"
+                            ToolTip="Générer automatiquement à partir du nom et prénom"
+                            VerticalAlignment="Bottom"
+                            Margin="0,0,0,10"
+                            Background="#17A2B8"
+                            Foreground="White"/>
+                </Grid>
+
+                <Grid Margin="0,5,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                        <TextBlock Text="Mot de passe *"/>
+                        <TextBox x:Name="PasswordTextBox"
+                                 ToolTip="Mot de passe initial de l'utilisateur (minimum 6 caractères)"/>
+                    </StackPanel>
+
+                    <Button Grid.Column="1"
+                            Content="Générer"
+                            Click="GeneratePasswordButton_Click"
+                            ToolTip="Générer un mot de passe sécurisé"
+                            VerticalAlignment="Bottom"
+                            Margin="0,0,0,10"
+                            Background="#28A745"
+                            Foreground="White"/>
+                </Grid>
+            </StackPanel>
+
+            <!-- Rôle et Statut -->
+            <Grid Grid.Row="4" Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                    <TextBlock Text="Rôle *"
+                               FontWeight="SemiBold"/>
+                    <ComboBox x:Name="RoleComboBox"
+                              SelectionChanged="RoleComboBox_SelectionChanged">
+                        <ComboBoxItem Content="Admin"/>
+                        <ComboBoxItem Content="Doctor"/>
+                        <ComboBoxItem Content="Nurse"/>
+                        <ComboBoxItem Content="Pharmacy"/>
+                        <ComboBoxItem Content="Reception"/>
+                        <!-- Remplacer Secretary par Accueil -->
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="Statut *"
+                               FontWeight="SemiBold"/>
+                    <ComboBox x:Name="StatusComboBox">
+                        <ComboBoxItem Content="Actif"/>
+                        <ComboBoxItem Content="Inactif"/>
+                    </ComboBox>
+                </StackPanel>
+            </Grid>
+
+            <!-- Service (pour les médecins seulement) -->
+            <StackPanel Grid.Row="5" Margin="0,10,0,0">
+                <TextBlock x:Name="ServiceLabelTextBlock"
+                           Text="Service assigné"
+                           FontWeight="SemiBold"/>
+                <ComboBox x:Name="ServiceComboBox"
+                          IsEnabled="False"
+                          ToolTip="Sélectionnez un service pour le médecin"/>
+                <TextBlock Text="Ce champ est requis uniquement pour les médecins"
+                           FontSize="10"
+                           Foreground="#666"
+                           FontStyle="Italic"
+                           Margin="0,2,0,0"/>
+            </StackPanel>
+
+            <!-- Notes supplémentaires -->
+            <StackPanel Grid.Row="6" Margin="0,15,0,0">
+                <TextBlock Text="Notes ou informations supplémentaires"
+                           FontWeight="SemiBold"/>
+                <TextBox x:Name="NotesTextBox"
+                         Height="60"
+                         TextWrapping="Wrap"
+                         AcceptsReturn="True"
+                         VerticalScrollBarVisibility="Auto"
+                         ToolTip="Informations complémentaires sur l'utilisateur"/>
+            </StackPanel>
+
+            <!-- Instructions -->
+            <Border Grid.Row="7"
+                    Background="#FFF3CD"
+                    BorderBrush="#FFEEBA"
+                    BorderThickness="1"
+                    CornerRadius="5"
+                    Padding="10"
+                    Margin="0,15,0,0">
+                <StackPanel>
+                    <TextBlock Text="💡 Instructions importantes:"
+                               FontWeight="SemiBold"
+                               Foreground="#856404"/>
+                    <TextBlock Text="• Les champs marqués d'un * sont obligatoires"
+                               FontSize="11"
+                               Foreground="#856404"/>
+                    <TextBlock Text="• L'email doit être un email professionnel valide"
+                               FontSize="11"
+                               Foreground="#856404"/>
+                    <TextBlock Text="• Le mot de passe doit contenir au moins 6 caractères"
+                               FontSize="11"
+                               Foreground="#856404"/>
+                    <TextBlock Text="• Les médecins doivent être assignés à un service"
+                               FontSize="11"
+                               Foreground="#856404"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Boutons -->
+            <StackPanel Grid.Row="8"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Margin="0,20,0,0">
+                <Button Content="Annuler"
+                        Click="CancelButton_Click"
+                        Background="#6C757D"
+                        Foreground="White"/>
+                <Button Content="Enregistrer"
+                        Click="SaveButton_Click"
+                        Background="#0D5C63"
+                        Foreground="White"
+                        FontWeight="SemiBold"
+                        MinWidth="120"/>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Window>
