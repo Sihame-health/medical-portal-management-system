@@ -82,5 +82,4 @@ This project was developed for academic purposes as part of a Master's program i
 
 ## 👩‍🎓 Authors
 
-- **Siham Ait Taleb** — concept, functional specifications (cahier des charges)
-- **Khadija El Kinani** — development
+- **Siham Ait Taleb** — **Khadija El Kinani** 
