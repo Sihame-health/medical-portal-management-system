@@ -2,6 +2,13 @@
 
 A desktop application that connects reception, doctors, nurses, and pharmacy into a single hospital workflow — from patient registration to prescription to medication delivery — with each role seeing only what's relevant to them.
 
+## 💾 Download
+
+Want to try it without setting up Visual Studio? Download the ready-to-run Windows package:
+
+👉 [**Download v1.0 (Windows, self-contained)**](https://github.com/Sihame-health/medical-portal-management-system/releases/tag/v1.0)
+Unzip and run `MedicalSystem.exe` — no .NET installation required.
+
 ## 📌 Overview
 
 Hospitals run on handoffs: reception registers a patient, a doctor prescribes, a nurse administers, a pharmacist fulfills. Without a shared system, that handoff happens on paper or gets lost between departments. This project is a local, role-based portal (WPF/C#) that keeps every step — registration, consultation, prescription, treatment, medication stock — in one connected system, with real-time notifications between roles (e.g. a nurse flags a concern, the doctor gets an urgent alert).
@@ -82,12 +89,6 @@ This project was developed for academic purposes as part of a Master's program i
 
 👉 Watch the demo: https://www.youtube.com/watch?v=yeeTuL4HN_I
 
-## 💾 Download
-
-Want to try it without setting up Visual Studio? Download the ready-to-run Windows package:
-
-👉 [**Download v1.0 (Windows, self-contained)**](https://github.com/Sihame-health/medical-portal-management-system/releases/tag/v1.0)
-Unzip and run `MedicalSystem.exe` — no .NET installation required.
 
 ## 👩‍🎓 Authors
 
