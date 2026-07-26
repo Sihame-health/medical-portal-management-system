@@ -82,6 +82,13 @@ This project was developed for academic purposes as part of a Master's program i
 
 👉 Watch the demo: https://www.youtube.com/watch?v=yeeTuL4HN_I
 
+## 💾 Download
+
+Want to try it without setting up Visual Studio? Download the ready-to-run Windows package:
+
+👉 [**Download v1.0 (Windows, self-contained)**](https://github.com/Sihame-health/medical-portal-management-system/releases/tag/v1.0)
+Unzip and run `MedicalSystem.exe` — no .NET installation required.
+
 ## 👩‍🎓 Authors
 
 - **Siham Ait Taleb** — **Khadija El Kinani** 
